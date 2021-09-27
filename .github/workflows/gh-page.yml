@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - run: npm install —-global @angular/cli
       - run: npm install
       - run: npm build
       - run: mv dist docs
