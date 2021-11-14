@@ -11,15 +11,16 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-          cache: npm
-      - run: npm i
+      - run: npm install
       - run: npx ng build
-      - run: mv dist/fuse docs
+      - run: |
+          [[ -d dist ]] || mkdir dist
+          mv dist docs
       - run: |
           git config --global user.name Ethereal
           git config --global user.email ethereal97@gmail.com
-          git checkout gh-pages
-          git add .
+          git checkout gh-pages --orphan
+          git add --all
           git commit -m 'Github Page'
           git push origin gh-pages --force
 
